@@ -1,0 +1,288 @@
+##################################
+#
+# V-KING BNBSX 
+#
+# BIGTREETECH SKR V1.3
+#
+##################################
+
+##################################
+#
+# XYZ
+#
+##################################
+
+[tmc2209 stepper_x]
+uart_pin: P1.17
+microsteps: 16
+run_current: 0.800
+hold_current: 0.500
+stealthchop_threshold: 250
+interpolate: True
+sense_resistor: 0.110
+diag_pin: ^P1.29
+driver_SGTHRS: 120
+
+[tmc2209 stepper_y]
+uart_pin: P1.15
+microsteps: 16
+run_current: 0.800
+hold_current: 0.500
+stealthchop_threshold: 250
+interpolate: True
+sense_resistor: 0.110
+diag_pin: ^P1.27
+driver_SGTHRS: 120
+
+[tmc2208 stepper_z]
+uart_pin: P1.10
+microsteps: 16
+run_current: 0.650
+hold_current: 0.450
+interpolate: True
+sense_resistor: 0.110
+#stealthchop_threshold: 30
+
+[stepper_x]
+step_pin: P2.2
+dir_pin: P2.6
+enable_pin: !P2.1
+step_distance: .00625
+#endstop_pin: P1.29
+position_endstop: -1
+position_min: -1
+position_max: 375
+homing_speed: 60
+homing_retract_dist: 0
+endstop_pin: tmc2209_stepper_x:virtual_endstop
+
+[stepper_y]
+step_pin: P0.19
+dir_pin: P0.20
+enable_pin: !P2.8
+step_distance: .00625
+#endstop_pin: P1.27
+position_endstop: 360
+position_min: 0
+position_max: 360
+homing_speed: 60
+homing_retract_dist: 0
+endstop_pin: tmc2209_stepper_y:virtual_endstop
+#homing_positive_dir: true
+
+[stepper_z]
+step_pin: P0.22
+dir_pin: !P2.11
+enable_pin: !P0.21
+step_distance: 0.0003125
+endstop_pin: probe:z_virtual_endstop
+#P1.25
+#position_endstop: 0
+position_min: -6
+position_max: 300
+homing_speed: 5
+
+##################################
+#
+# EXTRDUER / BED
+#
+##################################
+
+[tmc2209 extruder]
+uart_pin: P1.8
+microsteps: 8
+run_current: 1.000
+hold_current: 0.800
+interpolate: True
+sense_resistor: 0.110
+#stealthchop_threshold: 250
+#driver_TOFF: 4
+#driver_HEND: 2
+#driver_HSTRT: 1
+
+[extruder]
+step_pin: P2.13
+dir_pin: P0.11
+enable_pin: !P2.12
+#step_distance: 0.002272
+#step_distance: 0.00211416
+#step_distance: 0.00105708
+step_distance: 0.00212
+nozzle_diameter: 0.400
+filament_diameter: 1.750
+max_extrude_only_distance: 200.0
+max_extrude_cross_section: 50.0
+#heater_pin: P2.7
+heater_pin: P2.4
+sensor_type: ATC Semitec 104GT-2
+#sensor_pin: P0.24
+sensor_pin: P0.25
+control: pid
+pid_Kp: 17.678
+pid_Ki: 0.651
+pid_Kd: 119.992
+min_temp: -60
+max_temp: 260
+#max_extrude_only_velocity: 140
+#max_extrude_only_accel: 5000
+#pressure_advance: 0.09
+#min_extrude_temp: 180
+min_extrude_temp: 0
+
+#[extruder1]
+#step_pin: P0.1
+#dir_pin: P0.0
+#enable_pin: !P0.10
+#heater_pin: P2.4
+#heater_pin: P2.7
+#sensor_pin: P0.25
+#...
+
+[heater_bed]
+heater_pin: P2.5
+sensor_type: NTC 100K beta 3950
+sensor_pin: P0.23
+control: pid
+min_temp: 0
+max_temp: 130
+pid_Kp: 61.668
+pid_Ki: 2.741
+pid_Kd: 346.880
+
+##################################
+#
+#  FAN
+#
+##################################
+
+[fan]
+pin: P2.3
+
+[controller_fan box]
+pin: P1.24
+heater: extruder
+
+##################################
+#
+# GENERAL : MCU / PRINTER / DISPLAY
+#
+##################################
+
+[virtual_sdcard]
+path: ~/.octoprint/uploads/
+
+[mcu]
+serial: /dev/serial/by-id/usb-Klipper_lpc1768_0C600102E4182DAFBD379E5BC22000F5-if00
+
+[printer]
+kinematics: corexy
+max_velocity: 400
+#max_accel: 1500
+max_accel: 2000
+max_accel_to_decel: 2000
+max_z_velocity: 5
+max_z_accel: 100
+
+[input_shaper]
+shaper_freq_x: 36.86
+shaper_freq_y: 23.7
+shaper_type: mzv
+
+[force_move]
+enable_force_move: True
+
+# "RepRapDiscount 128x64 Full Graphic Smart Controller" type displays
+[display]
+lcd_type: st7920
+cs_pin: P1.19
+sclk_pin: P1.20
+sid_pin: P1.18
+encoder_pins: ^P3.26, ^P3.25
+click_pin: ^!P0.28
+
+[idle_timeout]
+timeout: 300
+
+##################################
+#
+#  PIN
+#
+##################################
+
+[output_pin beeper]
+pin: P1.30
+value: 0
+
+##################################
+#
+# Z probe ...
+#
+##################################
+
+[probe]
+pin: P1.25
+x_offset: 35
+y_offset: 0
+z_offset: 3.1
+
+[bed_mesh]
+speed: 100
+horizontal_move_z: 10
+mesh_min: 40,15
+mesh_max: 350,375
+probe_count: 4,4
+fade_start: 1.0
+fade_end: 10.0
+
+[screws_tilt_adjust]
+screw1: 0,5
+screw1_name: front left
+screw2: 310,5
+screw2_name: front right
+screw3: 0,375
+screw3_name: rear left
+screw4: 310,375
+screw4_name: rear right
+speed: 50
+horizontal_move_z: 10
+screw_thread: CCW-M5
+
+###########################################################################
+###########################################################################
+###########################################################################
+###########################################################################
+
+########################
+#
+# MACROS
+#
+########################
+[gcode_macro VARS_PRINTER]
+variable_end_x_pos: 10
+variable_end_y_pos: 10
+variable_touchmi_x_pos: 375
+variable_touchmi_y_pos: 0
+variable_touchmi_x_center_pos: 200
+variable_touchmi_y_center_pos: 200
+variable_touchmi_z_height: 20
+variable_enable_mmu: 1
+variable_enable_servo: 0
+variable_enable_z_tilt: 0
+variable_enable_clean_nozzle: 0
+variable_clean_x_pos: -14
+variable_clean_y_pos: 81
+variable_change_filament_x_pos: 125
+variable_change_filament_y_pos: 0
+variable_change_length_slow: 100
+variable_change_length_fast: 0
+gcode:
+
+[include  printer-macros.cfg]
+[include printer-mmu2s.cfg]
+#[include printer-laser.cfg]
+
+###########################################################################
+###########################################################################
+###########################################################################
+###########################################################################
+
