@@ -15,24 +15,36 @@
 [tmc2209 stepper_x]
 uart_pin: P1.17
 microsteps: 16
-run_current: 0.800
-hold_current: 0.500
-stealthchop_threshold: 250
+run_current: 1.000
+hold_current: 1.000
+#stealthchop_threshold: 250
 interpolate: True
 sense_resistor: 0.110
 diag_pin: ^P1.29
-driver_SGTHRS: 100
+driver_SGTHRS: 120
+#driver_TOFF: 3
+#driver_HEND: -1
+#driver_HSTRT: 5
+driver_TOFF: 3
+driver_HEND: 2
+driver_HSTRT: 4
 
 [tmc2209 stepper_y]
 uart_pin: P1.15
 microsteps: 16
-run_current: 0.800
-hold_current: 0.500
-stealthchop_threshold: 250
+run_current: 1.000
+hold_current: 1.000
+#stealthchop_threshold: 250
 interpolate: True
 sense_resistor: 0.110
 diag_pin: ^P1.27
-driver_SGTHRS: 80
+driver_SGTHRS: 120
+#driver_TOFF: 3
+#driver_HEND: -1
+#driver_HSTRT: 5
+driver_TOFF: 3
+driver_HEND: 2
+driver_HSTRT: 4
 
 [tmc2208 stepper_z]
 uart_pin: P1.10
@@ -49,10 +61,10 @@ dir_pin: P2.6
 enable_pin: !P2.1
 step_distance: .00625
 #endstop_pin: P1.29
-position_endstop: -1
-position_min: -1
+position_endstop: -2
+position_min: -2
 position_max: 375
-homing_speed: 100
+homing_speed: 60
 homing_retract_dist: 0
 endstop_pin: tmc2209_stepper_x:virtual_endstop
 
@@ -65,7 +77,7 @@ step_distance: .00625
 position_endstop: 380
 position_min: -20
 position_max: 380
-homing_speed: 100
+homing_speed: 60
 homing_retract_dist: 0
 endstop_pin: tmc2209_stepper_y:virtual_endstop
 #homing_positive_dir: true
@@ -223,7 +235,7 @@ value: 0
 pin: P1.25
 x_offset: 35
 y_offset: 0
-z_offset: 3.1
+z_offset: 2.5
 
 [bed_mesh]
 speed: 100
@@ -273,7 +285,7 @@ variable_clean_x_pos: -14
 variable_clean_y_pos: 81
 variable_change_filament_x_pos: 125
 variable_change_filament_y_pos: -10
-variable_change_length_slow: 10
+variable_change_length_slow: 100
 variable_change_length_fast: 0
 gcode:
 
