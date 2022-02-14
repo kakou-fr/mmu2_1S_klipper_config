@@ -183,7 +183,7 @@ heater: extruder
 ##################################
 
 [virtual_sdcard]
-path: ~/.octoprint/uploads/
+path: ~/gcode_files
 
 [mcu]
 serial: /dev/serial/by-id/usb-Klipper_lpc1768_0C600102E4182DAFBD379E5BC22000F5-if00
