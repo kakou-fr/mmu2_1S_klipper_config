@@ -1,6 +1,8 @@
+##### AUTOCREATED BY KIAUH #####
+[include kiauh.cfg]
 ##################################
 #
-# V-KING BNBSX 
+# V-KING MK3S-mmu2S bunny upgrade
 #
 # BIGTREETECH SKR V1.3
 #
@@ -14,7 +16,6 @@
 
 [tmc2209 stepper_x]
 uart_pin: P1.17
-microsteps: 16
 run_current: 1.000
 hold_current: 1.000
 #stealthchop_threshold: 250
@@ -31,7 +32,6 @@ driver_HSTRT: 4
 
 [tmc2209 stepper_y]
 uart_pin: P1.15
-microsteps: 16
 run_current: 1.000
 hold_current: 1.000
 #stealthchop_threshold: 250
@@ -48,7 +48,6 @@ driver_HSTRT: 4
 
 [tmc2208 stepper_z]
 uart_pin: P1.10
-microsteps: 16
 run_current: 0.650
 hold_current: 0.450
 interpolate: True
@@ -59,7 +58,9 @@ sense_resistor: 0.110
 step_pin: P2.2
 dir_pin: P2.6
 enable_pin: !P2.1
-step_distance: .00625
+#step_distance: .00625
+microsteps: 16
+rotation_distance: 20
 #endstop_pin: P1.29
 position_endstop: -2
 position_min: -2
@@ -72,11 +73,13 @@ endstop_pin: tmc2209_stepper_x:virtual_endstop
 step_pin: P0.19
 dir_pin: P0.20
 enable_pin: !P2.8
-step_distance: .00625
+#step_distance: .00625
+microsteps: 16
+rotation_distance: 20
 #endstop_pin: P1.27
-position_endstop: 380
-position_min: -20
-position_max: 380
+position_endstop: 370
+position_min: -15
+position_max: 370
 homing_speed: 60
 homing_retract_dist: 0
 endstop_pin: tmc2209_stepper_y:virtual_endstop
@@ -86,7 +89,9 @@ endstop_pin: tmc2209_stepper_y:virtual_endstop
 step_pin: P0.22
 dir_pin: !P2.11
 enable_pin: !P0.21
-step_distance: 0.0003125
+#step_distance: 0.0003125
+microsteps: 16
+rotation_distance: 1
 endstop_pin: probe:z_virtual_endstop
 #P1.25
 #position_endstop: 0
@@ -102,7 +107,6 @@ homing_speed: 5
 
 [tmc2209 extruder]
 uart_pin: P1.8
-microsteps: 8
 run_current: 1.000
 hold_current: 0.800
 interpolate: True
@@ -116,10 +120,9 @@ sense_resistor: 0.110
 step_pin: P2.13
 dir_pin: P0.11
 enable_pin: !P2.12
-#step_distance: 0.002272
-#step_distance: 0.00211416
-#step_distance: 0.00105708
-step_distance: 0.00212
+#step_distance: 0.00212
+microsteps: 8
+rotation_distance: 3.237876
 nozzle_diameter: 0.400
 filament_diameter: 1.750
 max_extrude_only_distance: 200.0
@@ -129,12 +132,12 @@ heater_pin: P2.4
 sensor_type: ATC Semitec 104GT-2
 #sensor_pin: P0.24
 sensor_pin: P0.25
-control: pid
-pid_Kp: 17.678
-pid_Ki: 0.651
-pid_Kd: 119.992
-min_temp: -60
-max_temp: 260
+#control: pid
+#pid_Kp: 17.678
+#pid_Ki: 0.651
+#pid_Kd: 119.992
+min_temp: 0
+max_temp: 280
 #max_extrude_only_velocity: 140
 #max_extrude_only_accel: 5000
 #pressure_advance: 0.09
@@ -152,7 +155,7 @@ min_extrude_temp: 0
 
 [heater_bed]
 heater_pin: P2.5
-sensor_type: NTC 100K beta 3950
+sensor_type: Generic 3950
 sensor_pin: P0.23
 control: pid
 min_temp: 0
@@ -181,7 +184,7 @@ heater: extruder
 ##################################
 
 [virtual_sdcard]
-path: ~/.octoprint/uploads/
+path: ~/gcode_files
 
 [mcu]
 serial: /dev/serial/by-id/usb-Klipper_lpc1768_0C600102E4182DAFBD379E5BC22000F5-if00
@@ -213,7 +216,7 @@ encoder_pins: ^P3.26, ^P3.25
 click_pin: ^!P0.28
 
 [idle_timeout]
-timeout: 300
+timeout: 3600
 
 ##################################
 #
@@ -235,13 +238,13 @@ value: 0
 pin: P1.25
 x_offset: 35
 y_offset: 0
-z_offset: 2.5
+z_offset: 4.1
 
 [bed_mesh]
 speed: 100
 horizontal_move_z: 10
 mesh_min: 40,15
-mesh_max: 350,375
+mesh_max: 350,370
 probe_count: 4,4
 fade_start: 1.0
 fade_end: 10.0
@@ -251,9 +254,9 @@ screw1: 0,5
 screw1_name: front left
 screw2: 310,5
 screw2_name: front right
-screw3: 0,375
+screw3: 0,370
 screw3_name: rear left
-screw4: 310,375
+screw4: 310,370
 screw4_name: rear right
 speed: 50
 horizontal_move_z: 10
@@ -284,13 +287,14 @@ variable_enable_clean_nozzle: 0
 variable_clean_x_pos: -14
 variable_clean_y_pos: 81
 variable_change_filament_x_pos: 125
-variable_change_filament_y_pos: -10
+variable_change_filament_y_pos: -15
 variable_change_length_slow: 100
 variable_change_length_fast: 0
 gcode:
 
 [include  printer-macros.cfg]
 [include printer-mmu2s.cfg]
+[include printer-mainsail.cfg]
 #[include printer-laser.cfg]
 
 ###########################################################################
@@ -298,3 +302,12 @@ gcode:
 ###########################################################################
 ###########################################################################
 
+#*# <---------------------- SAVE_CONFIG ---------------------->
+#*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
+#*#
+#*# [extruder]
+#*# control = pid
+#*# pid_kp = 33.256
+#*# pid_ki = 4.106
+#*# pid_kd = 67.343
+#*#
