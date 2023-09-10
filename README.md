@@ -3,7 +3,7 @@
 Unified  macros for printer and touch-mi  support
 
 ```
-[gcode_macro VARS_PRINTER]
+[gcode_macro _VARS_PRINTER]
 variable_end_x_pos: 10
 variable_end_y_pos: 10
 variable_touchmi_x_pos: 375

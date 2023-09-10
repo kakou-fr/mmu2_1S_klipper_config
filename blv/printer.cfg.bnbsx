@@ -1,3 +1,4 @@
+[include shell_command.cfg]
 # This file contains common pin mappings for the FLYF407ZG.
 # To use this config, the firmware should be compiled for the
 # STM32F407 with a "32KiB bootloader".
@@ -18,8 +19,10 @@
 step_pin: PB9
 dir_pin: !PE0
 enable_pin: !PE1
-#step_distance: .005
-step_distance: .00625
+#step_distance: .00625
+microsteps: 64
+rotation_distance: 40
+full_steps_per_rotation: 400
 #endstop_pin: ^!PC3 # max : PC2
 position_endstop: -1
 position_min: -1
@@ -33,7 +36,10 @@ step_pin: PB8
 dir_pin: !PG11
 enable_pin: !PG12
 #step_distance: .005
-step_distance: .00625
+#step_distance: .00625
+microsteps: 64
+rotation_distance: 40
+full_steps_per_rotation:400
 #endstop_pin: ^!PF2 # max : PF1
 endstop_pin: tmc2209_stepper_y:virtual_endstop
 position_min: -47
@@ -42,18 +48,47 @@ position_max: 215
 homing_speed: 80
 homing_retract_dist: 0
 
+[stepper_z]
+step_pin: PD14
+dir_pin: PG4
+enable_pin: !PG5
+#step_distance: .0025
+microsteps: 32
+rotation_distance: 8
+full_steps_per_rotation:200
+endstop_pin: probe:z_virtual_endstop
+#endstop_pin: PF0 # max : PC15 # Z3 : PC14
+position_min: -8
+#position_endstop: -5
+position_max: 255
+homing_speed: 5
+
+
 [stepper_z1]
 step_pin: PA8
 dir_pin: !PD6
 enable_pin: !PD7
-step_distance: .0025
+#step_distance: .0025
+microsteps: 32
+full_steps_per_rotation:200
+rotation_distance: 8
 
 [extruder]
 step_pin: PC7
 dir_pin: !PD3
 enable_pin: !PD4
 #step_distance: .002272
-step_distance: 0.00212
+#step_distance: 0.00212
+microsteps: 8
+#rotation_distance: 3.237876
+##  Update value below when you perform extruder calibration
+##  If you ask for 100mm of filament, but in reality it is 98mm:
+##  rotation_distance = <previous_rotation_distance> * <actual_extrude_distance> / 100
+##  22.6789511 is a good starting point
+#rotation_distance: 22.6789511   #Bondtech 5mm Drive Gears
+rotation_distance: 24.94684621
+gear_ratio: 54:16
+full_steps_per_rotation: 400 #200 for 1.8 degree, 400 for 0.9 degree
 nozzle_diameter: 0.400
 filament_diameter: 1.750
 max_extrude_only_distance: 200.0
@@ -70,7 +105,7 @@ max_temp: 260
 #sensor_type: MAX6675
 #spi_bus: spi1
 min_extrude_temp: 0
-#pressure_advance: 0.09
+pressure_advance: 0.046
 
 #[extruder_stepper extruder1]
 #extruder: extruder
@@ -99,19 +134,6 @@ min_extrude_temp: 0
 #heater_pin: PE6 # Heat2
 #sensor_pin: PC0 # T2
 #...
-
-[stepper_z]
-step_pin: PD14
-dir_pin: PG4
-enable_pin: !PG5
-step_distance: .0025
-endstop_pin: probe:z_virtual_endstop
-#endstop_pin: PF0 # max : PC15 # Z3 : PC14
-position_min: -8
-#position_endstop: -5
-position_max: 255
-homing_speed: 5
-
 
 
 #[extruder3]
@@ -197,6 +219,7 @@ max_velocity: 400
 max_accel: 1500
 max_z_velocity: 10
 max_z_accel: 100
+square_corner_velocity: 5.0
 
 [idle_timeout]
 timeout: 3600
@@ -208,7 +231,7 @@ default_type: command
 enable_force_move: True
 
 [virtual_sdcard]
-path: /home/pi/sdcard
+path: /home/pi/printer_data/gcodes
 
 [display_status]
 
@@ -218,34 +241,42 @@ path: /home/pi/sdcard
 
 [tmc2209 stepper_x]
 uart_pin: PG13
-microsteps: 16
 run_current: 1.000
-hold_current: 0.600
-stealthchop_threshold: 250
+interpolate: False
+sense_resistor: 0.110
+stealthchop_threshold: 0
+#hold_current: 0.600
+#stealthchop_threshold: 250
 driver_SGTHRS: 140
 diag_pin: PC3
 
 [tmc2209 stepper_y]
 uart_pin: PG10
-microsteps: 16
 run_current: 1.000
-hold_current: 0.600
-stealthchop_threshold: 250
+interpolate: False
+sense_resistor: 0.110
+stealthchop_threshold: 0
+#hold_current: 0.600
+#stealthchop_threshold: 250
 driver_SGTHRS: 140
 diag_pin: PF2
 
 [tmc2208 stepper_z]
 uart_pin: PD5
-microsteps: 16
 run_current: 0.650
-hold_current: 0.450
-stealthchop_threshold: 30
+interpolate: False
+sense_resistor: 0.110
+stealthchop_threshold: 0
+#hold_current: 0.450
+#stealthchop_threshold: 30
 
 [tmc2209 extruder]
 uart_pin: PD1
-microsteps: 8
 run_current: 1.000
-hold_current: 0.800
+interpolate: False
+sense_resistor: 0.110
+stealthchop_threshold: 0
+#hold_current: 0.800
 #stealthchop_threshold: 5
 
 #[tmc2208 extruder1]
@@ -264,10 +295,12 @@ hold_current: 0.800
 
 [tmc2208 stepper_z1]
 uart_pin: PG3
-microsteps: 16
 run_current: 0.650
-hold_current: 0.450
-stealthchop_threshold: 5
+interpolate: False
+sense_resistor: 0.110
+stealthchop_threshold: 0
+#hold_current: 0.450
+#stealthchop_threshold: 30
 
 #[tmc2208 extruder3]
 #uart_pin: PG3
@@ -434,7 +467,7 @@ aliases:
 pin: PF0
 x_offset: 30
 y_offset: 5
-z_offset: 3.55
+z_offset: 4.1
 
 [bed_mesh]
 speed: 70
@@ -480,7 +513,7 @@ retry_tolerance: 0.05
 # MACROS
 #
 ########################
-[gcode_macro VARS_PRINTER]
+[gcode_macro _VARS_PRINTER]
 variable_end_x_pos: 0
 variable_end_y_pos: 180
 variable_touchmi_x_pos: 260
