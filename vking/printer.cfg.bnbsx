@@ -14,53 +14,14 @@
 #
 ##################################
 
-[tmc2209 stepper_x]
-uart_pin: P1.17
-run_current: 1.000
-hold_current: 1.000
-#stealthchop_threshold: 250
-interpolate: True
-sense_resistor: 0.110
-diag_pin: ^P1.29
-driver_SGTHRS: 120
-#driver_TOFF: 3
-#driver_HEND: -1
-#driver_HSTRT: 5
-driver_TOFF: 3
-driver_HEND: 2
-driver_HSTRT: 4
-
-[tmc2209 stepper_y]
-uart_pin: P1.15
-run_current: 1.000
-hold_current: 1.000
-#stealthchop_threshold: 250
-interpolate: True
-sense_resistor: 0.110
-diag_pin: ^P1.27
-driver_SGTHRS: 120
-#driver_TOFF: 3
-#driver_HEND: -1
-#driver_HSTRT: 5
-driver_TOFF: 3
-driver_HEND: 2
-driver_HSTRT: 4
-
-[tmc2208 stepper_z]
-uart_pin: P1.10
-run_current: 0.650
-hold_current: 0.450
-interpolate: True
-sense_resistor: 0.110
-#stealthchop_threshold: 30
-
 [stepper_x]
 step_pin: P2.2
 dir_pin: P2.6
 enable_pin: !P2.1
 #step_distance: .00625
-microsteps: 16
-rotation_distance: 20
+microsteps: 64
+rotation_distance: 40
+full_steps_per_rotation: 400
 #endstop_pin: P1.29
 position_endstop: -2
 position_min: -2
@@ -74,8 +35,9 @@ step_pin: P0.19
 dir_pin: P0.20
 enable_pin: !P2.8
 #step_distance: .00625
-microsteps: 16
-rotation_distance: 20
+microsteps: 64
+rotation_distance: 40
+full_steps_per_rotation: 400
 #endstop_pin: P1.27
 position_endstop: 370
 position_min: -15
@@ -92,12 +54,55 @@ enable_pin: !P0.21
 #step_distance: 0.0003125
 microsteps: 16
 rotation_distance: 1
+full_steps_per_rotation:200
 endstop_pin: probe:z_virtual_endstop
 #P1.25
 #position_endstop: 0
 position_min: -6
 position_max: 300
 homing_speed: 5
+
+[tmc2209 stepper_x]
+uart_pin: P1.17
+run_current: 1.000
+#hold_current: 1.000
+stealthchop_threshold: 0
+interpolate: False
+sense_resistor: 0.110
+diag_pin: ^P1.29
+driver_SGTHRS: 120
+#driver_TOFF: 3
+#driver_HEND: -1
+#driver_HSTRT: 5
+driver_TOFF: 3
+driver_HEND: 2
+driver_HSTRT: 4
+
+[tmc2209 stepper_y]
+uart_pin: P1.15
+run_current: 1.000
+#hold_current: 1.000
+stealthchop_threshold: 0
+interpolate: False
+sense_resistor: 0.110
+diag_pin: ^P1.27
+driver_SGTHRS: 120
+#driver_TOFF: 3
+#driver_HEND: -1
+#driver_HSTRT: 5
+driver_TOFF: 3
+driver_HEND: 2
+driver_HSTRT: 4
+
+[tmc2208 stepper_z]
+uart_pin: P1.10
+run_current: 0.650
+#hold_current: 0.450
+interpolate: False
+sense_resistor: 0.110
+stealthchop_threshold: 0
+
+
 
 ##################################
 #
@@ -108,10 +113,10 @@ homing_speed: 5
 [tmc2209 extruder]
 uart_pin: P1.8
 run_current: 1.000
-hold_current: 0.800
-interpolate: True
+#hold_current: 0.800
+interpolate: False
 sense_resistor: 0.110
-#stealthchop_threshold: 250
+stealthchop_threshold: 0
 #driver_TOFF: 4
 #driver_HEND: 2
 #driver_HSTRT: 1
@@ -122,7 +127,15 @@ dir_pin: P0.11
 enable_pin: !P2.12
 #step_distance: 0.00212
 microsteps: 8
-rotation_distance: 3.237876
+#rotation_distance: 3.237876
+##  Update value below when you perform extruder calibration
+##  If you ask for 100mm of filament, but in reality it is 98mm:
+##  rotation_distance = <previous_rotation_distance> * <actual_extrude_distance> / 100
+##  22.6789511 is a good starting point
+#rotation_distance: 22.6789511   #Bondtech 5mm Drive Gears
+rotation_distance: 24.94684621
+gear_ratio: 54:16
+full_steps_per_rotation: 400 #200 for 1.8 degree, 400 for 0.9 degree
 nozzle_diameter: 0.400
 filament_diameter: 1.750
 max_extrude_only_distance: 200.0
@@ -140,9 +153,9 @@ min_temp: 0
 max_temp: 280
 #max_extrude_only_velocity: 140
 #max_extrude_only_accel: 5000
-#pressure_advance: 0.09
 #min_extrude_temp: 180
 min_extrude_temp: 0
+#pressure_advance: 0.046
 
 #[extruder1]
 #step_pin: P0.1
@@ -292,7 +305,7 @@ variable_change_length_slow: 100
 variable_change_length_fast: 0
 gcode:
 
-[include  printer-macros.cfg]
+[include printer-macros.cfg]
 [include printer-mmu2s.cfg]
 [include printer-mainsail.cfg]
 #[include printer-laser.cfg]
@@ -311,3 +324,20 @@ gcode:
 #*# pid_ki = 4.106
 #*# pid_kd = 67.343
 #*#
+#*# [bed_mesh default]
+#*# version = 1
+#*# points =
+#*# 	  0.149062, 0.065312, 0.050937, 0.155625
+#*# 	  0.043125, 0.031875, 0.018125, 0.090000
+#*# 	  0.087812, 0.066875, 0.069687, 0.143125
+#*# 	  0.178750, 0.095625, 0.085625, 0.191562
+#*# tension = 0.2
+#*# min_x = 40.0
+#*# algo = lagrange
+#*# y_count = 4
+#*# mesh_y_pps = 2
+#*# min_y = 15.0
+#*# x_count = 4
+#*# max_y = 369.99
+#*# mesh_x_pps = 2
+#*# max_x = 349.99
