@@ -485,13 +485,13 @@ fade_end: 10.0
 
 
 [screws_tilt_adjust]
-screw1: 0,-1
+screw1: 2,10
 screw1_name: front left
-screw2: 160,-1
+screw2: 200,10
 screw2_name: front right
-screw3: 0,160
+screw3: 2,210
 screw3_name: rear left
-screw4: 160,160
+screw4: 200,210
 screw4_name: rear right
 speed: 50
 horizontal_move_z: 10
@@ -574,3 +574,22 @@ gcode:
 #*# pid_kp = 27.300
 #*# pid_ki = 1.596
 #*# pid_kd = 116.706
+#*#
+#*# [bed_mesh default]
+#*# version = 1
+#*# points =
+#*# 	  0.133750, 0.005000, -0.055000, -0.032500, 0.033750
+#*# 	  0.176250, 0.050000, 0.008750, 0.060000, 0.091250
+#*# 	  0.131250, 0.013750, -0.006250, 0.025000, 0.140000
+#*# 	  0.140000, 0.006250, -0.035000, 0.052500, 0.096250
+#*# 	  0.170000, 0.015000, 0.033750, 0.052500, 0.121250
+#*# x_count = 5
+#*# y_count = 5
+#*# mesh_x_pps = 2
+#*# mesh_y_pps = 2
+#*# algo = lagrange
+#*# tension = 0.2
+#*# min_x = 40.0
+#*# max_x = 230.0
+#*# min_y = 10.0
+#*# max_y = 210.0
