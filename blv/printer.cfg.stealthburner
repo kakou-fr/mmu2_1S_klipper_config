@@ -26,7 +26,7 @@ full_steps_per_rotation: 400
 #endstop_pin: ^!PC3 # max : PC2
 position_endstop: -1
 position_min: -1
-position_max: 260
+position_max: 245
 homing_speed: 80
 endstop_pin: tmc2209_stepper_x:virtual_endstop
 homing_retract_dist: 0
@@ -116,7 +116,7 @@ max_temp: 260
 #sensor_type: MAX6675
 #spi_bus: spi1
 min_extrude_temp: 0
-#pressure_advance: 0.046
+pressure_advance: 0.06
 
 #[extruder_stepper extruder1]
 #extruder: extruder
@@ -510,7 +510,7 @@ screw_thread: CW-M3
 
 [z_tilt]
 z_positions:
-    -65,85
+    -60,85
     295,85
 points:
     5,105
@@ -532,7 +532,7 @@ retry_tolerance: 0.05
 [gcode_macro _VARS_PRINTER]
 variable_end_x_pos: 0
 variable_end_y_pos: 180
-variable_touchmi_x_pos: 260
+variable_touchmi_x_pos: 245
 variable_touchmi_y_pos: 0
 variable_touchmi_x_center_pos: 125
 variable_touchmi_y_center_pos: 100
