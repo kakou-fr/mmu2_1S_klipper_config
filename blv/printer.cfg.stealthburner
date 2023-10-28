@@ -462,6 +462,12 @@ initial_BLUE: 0.4
 [output_pin beeper]
 pin: EXP1_1
 
+
+[temperature_sensor mcu_temp]
+sensor_type: temperature_mcu
+min_temp: 0
+max_temp: 100
+
 ########################################
 # EXP1 / EXP2 (display) pins
 ########################################
@@ -483,7 +489,7 @@ aliases:
 pin: PF0
 x_offset: 30
 y_offset: 5
-z_offset: 6.5
+z_offset: 4.14
 
 [bed_mesh]
 speed: 70
@@ -530,14 +536,14 @@ retry_tolerance: 0.05
 #
 ########################
 [gcode_macro _VARS_PRINTER]
-variable_end_x_pos: 0
+variable_end_x_pos: 10
 variable_end_y_pos: 180
 variable_touchmi_x_pos: 245
 variable_touchmi_y_pos: 0
 variable_touchmi_x_center_pos: 125
 variable_touchmi_y_center_pos: 100
 variable_touchmi_z_height: 20
-variable_enable_mmu: 0
+variable_enable_mmu: 1
 variable_enable_servo: 1
 variable_enable_z_tilt: 1
 variable_enable_clean_nozzle: 0
@@ -576,7 +582,8 @@ gcode:
 #[include printer-mainsail.cfg]
 [include mainsail.cfg]
 [include printer-macros.cfg]
-
+[include printer-mmu2s-length-sensors.cfg]
+[include stealthburner_leds.cfg]
 #*# <---------------------- SAVE_CONFIG ---------------------->
 #*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
 #*#
