@@ -489,7 +489,7 @@ aliases:
 pin: PF0
 x_offset: 30
 y_offset: 5
-z_offset: 4.14
+z_offset: 4.20
 
 [bed_mesh]
 speed: 70
