@@ -249,7 +249,7 @@ value: 0
 pin: P1.25
 x_offset: 35
 y_offset: 0
-z_offset: 4.1
+z_offset: 4.44
 
 [bed_mesh]
 speed: 100
@@ -328,6 +328,7 @@ gcode:
 #[include printer-mainsail.cfg]
 [include mainsail.cfg]
 #[include printer-laser.cfg]
+#[include printer-mmu2s-length-sensors.cfg]
 
 ###########################################################################
 ###########################################################################
