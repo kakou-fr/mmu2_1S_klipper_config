@@ -67,51 +67,24 @@ endstop_pin: tmc2209_idler_stepper:virtual_endstop
 homing_retract_dist: 0
 
 ## IR extruder switch
-#[filament_switch_sensor sensor_on_gear]
+[filament_switch_sensor ir_sensor]
+pause_on_runout: False
+switch_pin: ^PF1 # Y+
+event_delay:0.1
+runout_gcode:
+    M117 Filament not in extruder
+insert_gcode:
+    M117 Filament in extruder
+
+## IR splitter switch
+#[filament_switch_sensor splitter_sensor]
 #pause_on_runout: False
-#switch_pin: ^PF1 # Y+
+#switch_pin: ^PC3 # P1.28 for X-max on printer board
 #event_delay:0.1
 #runout_gcode:
-#    M117 Filament not in extruder
+#    M117 Filament not in splitter
 #insert_gcode:
-#    M117 Filament in extruder
-
-#[delayed_gcode _DISABLE_FILAMENT_SENSOR_ON_GEAR]
-#initial_duration: 1
-#gcode:
-#    SET_FILAMENT_SENSOR SENSOR=sensor_on_gear ENABLE=0
- 
-
-# micro switch
-[filament_switch_sensor sensor_before_gear]
-pause_on_runout: False
-switch_pin: ^PC2
-event_delay:0.1
-runout_gcode:
-    M117 Filament not in splitter
-insert_gcode:
-    M117 Filament in splitter
-
-[delayed_gcode _DISABLE_FILAMENT_SENSOR_BEFORE_GEAR]
-initial_duration: 1
-gcode:
-    SET_FILAMENT_SENSOR SENSOR=sensor_before_gear ENABLE=0
-
-# micro switch
-[filament_switch_sensor sensor_after_gear]
-pause_on_runout: False
-switch_pin: ^PC14
-event_delay:0.1
-runout_gcode:
-    M117 Filament not in splitter
-insert_gcode:
-    M117 Filament in splitter
-
-[delayed_gcode _DISABLE_FILAMENT_SENSOR_AFTER_GEAR]
-initial_duration: 1
-gcode:
-    SET_FILAMENT_SENSOR SENSOR=sensor_after_gear ENABLE=0
- 
+#    M117 Filament in splitter
 
 ###############################################
 #

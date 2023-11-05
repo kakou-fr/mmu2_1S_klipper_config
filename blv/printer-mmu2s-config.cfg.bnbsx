@@ -39,7 +39,7 @@ variable_bowden_load_length2: 90
 variable_bowden_unload_length: 20
 variable_pinda_load_length: 100
 variable_pinda_unload_length: 15
-variable_load_in_extruder: 70
+variable_load_in_extruder: 52
 variable_unload_in_extruder1: 20
 variable_unload_in_extruder2: 30
 variable_colorselector = [73.5,57.5,45.5,31.5,18.5]
@@ -79,9 +79,8 @@ variable_t3_purge_load_length: 40
 variable_t3_purge_unload_length: 0
 variable_t4_purge_load_length: 40
 variable_t4_purge_unload_length: 0
-variable_enable_motion_sensor: False
+variable_enable_motion_sensor: True
 variable_enable_debug: False
-variable_enable_stealthburner_leds: True
 gcode:
 
 # MMU2S STANDARD
