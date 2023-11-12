@@ -249,7 +249,7 @@ value: 0
 pin: P1.25
 x_offset: 35
 y_offset: 0
-z_offset: 4.44
+z_offset: 4.34
 
 [bed_mesh]
 speed: 100
