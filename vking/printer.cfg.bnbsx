@@ -36,7 +36,7 @@ enable_pin: !P2.8
 microsteps: 64
 rotation_distance: 40
 full_steps_per_rotation: 400
-#endstop_pin: P1.27
+#endstop_pin: P1.28
 position_endstop: 370
 position_min: -15
 position_max: 370
@@ -54,14 +54,14 @@ microsteps: 16
 rotation_distance: 1
 full_steps_per_rotation:200
 endstop_pin: probe:z_virtual_endstop
-#P1.25
+#P1.27
 #position_endstop: 0
 position_min: -6
 position_max: 300
 homing_speed: 5
 
 [tmc2209 stepper_x]
-uart_pin: P1.17
+uart_pin: P1.10
 run_current: 1.000
 #hold_current: 1.000
 stealthchop_threshold: 0
@@ -77,13 +77,13 @@ driver_HEND: 2
 driver_HSTRT: 4
 
 [tmc2209 stepper_y]
-uart_pin: P1.15
+uart_pin: P1.9
 run_current: 1.000
 #hold_current: 1.000
 stealthchop_threshold: 0
 interpolate: False
 sense_resistor: 0.110
-diag_pin: ^P1.27
+diag_pin: ^P1.28
 driver_SGTHRS: 130
 #driver_TOFF: 3
 #driver_HEND: -1
@@ -93,7 +93,7 @@ driver_HEND: 2
 driver_HSTRT: 4
 
 [tmc2208 stepper_z]
-uart_pin: P1.10
+uart_pin: P1.8
 run_current: 0.650
 #hold_current: 0.450
 interpolate: False
@@ -109,7 +109,7 @@ stealthchop_threshold: 0
 ##################################
 
 [tmc2209 extruder]
-uart_pin: P1.8
+uart_pin: P1.4
 run_current: 1.000
 #hold_current: 0.800
 interpolate: False
@@ -118,6 +118,11 @@ stealthchop_threshold: 0
 #driver_TOFF: 4
 #driver_HEND: 2
 #driver_HSTRT: 1
+
+#[tmc2208 extruder1]
+#uart_pin: P1.1
+#run_current: 0.800
+#stealthchop_threshold: 999999
 
 [extruder]
 step_pin: P2.13
@@ -141,8 +146,8 @@ max_extrude_cross_section: 50.0
 #heater_pin: P2.7
 heater_pin: P2.4
 sensor_type: ATC Semitec 104GT-2
-#sensor_pin: P0.24
-sensor_pin: P0.25
+#sensor_pin: P0.23
+sensor_pin: P0.24
 #control: pid
 #pid_Kp: 17.678
 #pid_Ki: 0.651
@@ -167,7 +172,7 @@ min_extrude_temp: 0
 [heater_bed]
 heater_pin: P2.5
 sensor_type: Generic 3950
-sensor_pin: P0.23
+sensor_pin: P0.25
 control: pid
 min_temp: 0
 max_temp: 130
@@ -185,7 +190,7 @@ pid_Kd: 346.880
 pin: P2.3
 
 [controller_fan box]
-pin: P1.24
+pin: P1.25
 heater: extruder
 
 ##################################
@@ -198,7 +203,7 @@ heater: extruder
 path: ~/gcode_files
 
 [mcu]
-serial: /dev/serial/by-id/usb-Klipper_lpc1768_0C600102E4182DAFBD379E5BC22000F5-if00
+serial: /dev/serial/by-id/usb-Klipper_lpc1769_07C00001A49869AF27CD3E5EC62000F5-if00
 
 [printer]
 kinematics: corexy
@@ -246,10 +251,10 @@ value: 0
 ##################################
 
 [probe]
-pin: P1.25
+pin: P1.27
 x_offset: 35
 y_offset: 0
-z_offset: 4.34
+z_offset: 3.85
 
 [bed_mesh]
 speed: 100
@@ -340,9 +345,9 @@ gcode:
 #*#
 #*# [extruder]
 #*# control = pid
-#*# pid_kp = 33.256
-#*# pid_ki = 4.106
-#*# pid_kd = 67.343
+#*# pid_kp = 27.300
+#*# pid_ki = 1.596
+#*# pid_kd = 116.706
 #*#
 #*# [bed_mesh default]
 #*# version = 1
