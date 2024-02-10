@@ -60,7 +60,7 @@ endstop_pin: probe:z_virtual_endstop
 #endstop_pin: PF0 # max : PC15 # Z3 : PC14
 position_min: -8
 #position_endstop: -5
-position_max: 255
+position_max: 290
 homing_speed: 5
 
 
@@ -102,7 +102,7 @@ microsteps: 8
 full_steps_per_rotation: 200    #200 for 1.8 degree, 400 for 0.9 degree
 #
 nozzle_diameter: 0.400
-pressure_advance: 0.06
+#pressure_advance: 0.06
 #
 #nozzle_diameter: 0.800
 #
@@ -493,7 +493,7 @@ aliases:
 pin: PF0
 x_offset: 30
 y_offset: 5
-z_offset: 4.450
+z_offset: 4.50
 
 [bed_mesh]
 speed: 70

@@ -1,4 +1,6 @@
 #!/bin/bash
+
+do_stat(){
 FILE=$1
 NBEXT=4 # NB - 1
 FILAMENT_LENGTH=$2
@@ -183,8 +185,10 @@ echo -e "Retry Load     :\t "$(cat $FILE | grep "ERROR:RLOAD" | wc -l)
 echo -e "Retry Unload   :\t "$(cat $FILE | grep "ERROR:RULOAD" | wc -l)
 echo -e "Cut            :\t "$(cat $FILE | grep "ERROR:CUT" | wc -l)
 echo -e "Runout            :\t "$(cat $FILE | grep "ERROR:RUNOUT" | wc -l)
+}
 
-
-
+OUT=/home/pi/printer_data/logs/mmu-stat-$(date +'%Y-%m-%d-%H:%M:%S').log
+do_stat $1 $2 >  $OUT
+cat $OUT
 
 
