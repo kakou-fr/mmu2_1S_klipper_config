@@ -42,9 +42,9 @@ rotation_distance: 40
 full_steps_per_rotation:400
 #endstop_pin: ^!PF2 # max : PF1
 endstop_pin: tmc2209_stepper_y:virtual_endstop
-position_min: -47
-position_endstop: -47
-position_max: 215
+position_min: -71
+position_endstop: -71
+position_max: 180
 homing_speed: 80
 homing_retract_dist: 0
 
@@ -93,6 +93,7 @@ enable_pin: !PD4
 ##  rotation_distance = <previous_rotation_distance> * <actual_extrude_distance> / 100
 ##  22.6789511 is a good starting point
 rotation_distance: 22.6789511   #Bondtech 5mm Drive Gears
+#rotation_distance: 21.658398
 ##  Update Gear Ratio depending on your Extruder Type
 ##  Use 50:10 for Stealthburner/Clockwork 2
 ##  Use 50:17 for Afterburner/Clockwork (BMG Gear Ratio)
@@ -272,7 +273,7 @@ diag_pin: PC3
 
 [tmc2209 stepper_y]
 uart_pin: PG10
-run_current: 1.000
+run_current: 1.200
 interpolate: False
 sense_resistor: 0.110
 stealthchop_threshold: 0
@@ -491,15 +492,15 @@ aliases:
 ##################################
 [probe]
 pin: PF0
-x_offset: 30
-y_offset: 5
-z_offset: 4.50
+x_offset: 42
+y_offset: 22
+z_offset: 4.9
 
 [bed_mesh]
 speed: 70
 horizontal_move_z: 10
-mesh_min: 40,10
-mesh_max: 230,210
+mesh_min: 42,22
+mesh_max: 230,200
 probe_count: 5,5
 fade_start: 1.0
 fade_end: 10.0
@@ -552,7 +553,7 @@ variable_enable_servo: 1
 variable_enable_z_tilt: 1
 variable_enable_clean_nozzle: 0
 variable_clean_x_pos: -14
-variable_clean_y_pos: 81
+variable_clean_y_pos: 0
 variable_change_filament_x_pos: 10
 variable_change_filament_y_pos: 10
 variable_change_length_slow: 0
@@ -588,6 +589,7 @@ gcode:
 [include printer-macros.cfg]
 [include printer-mmu2s-length-sensors.cfg]
 [include stealthburner_leds.cfg]
+
 #*# <---------------------- SAVE_CONFIG ---------------------->
 #*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
 #*#
@@ -600,11 +602,11 @@ gcode:
 #*# [bed_mesh default]
 #*# version = 1
 #*# points =
-#*# 	  0.072500, -0.011250, -0.067500, -0.042500, 0.006250
-#*# 	  0.123750, 0.047500, 0.007500, 0.053750, 0.063750
-#*# 	  0.087500, 0.002500, -0.010000, 0.027500, 0.106250
-#*# 	  0.221250, 0.061250, -0.026250, 0.042500, 0.060000
-#*# 	  0.065000, -0.063750, -0.051250, -0.006250, 0.053750
+#*# 	  0.172500, 0.045000, -0.015000, 0.023750, 0.168750
+#*# 	  0.188750, 0.045000, 0.025000, 0.090000, 0.131250
+#*# 	  0.140000, 0.030000, 0.018750, 0.056250, 0.150000
+#*# 	  0.118750, -0.006250, -0.023750, 0.063750, 0.123750
+#*# 	  0.122500, 0.031250, 0.053750, 0.106250, 0.186250
 #*# x_count = 5
 #*# y_count = 5
 #*# mesh_x_pps = 2
