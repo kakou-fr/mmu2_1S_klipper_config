@@ -145,13 +145,10 @@ max_extrude_only_distance: 200.0
 max_extrude_cross_section: 50.0
 #heater_pin: P2.7
 heater_pin: P2.4
-sensor_type: ATC Semitec 104GT-2
-#sensor_pin: P0.23
-sensor_pin: P0.24
-#control: pid
-#pid_Kp: 17.678
-#pid_Ki: 0.651
-#pid_Kd: 119.992
+#sensor_type: ATC Semitec 104GT-2
+sensor_type: ATC Semitec 104NT-4-R025H42G
+sensor_pin: P0.23
+#sensor_pin: P0.24
 min_temp: 0
 max_temp: 280
 #max_extrude_only_velocity: 140
@@ -159,6 +156,10 @@ max_temp: 280
 #min_extrude_temp: 180
 min_extrude_temp: 0
 #pressure_advance: 0.046
+control=pid
+pid_Kp=51.704
+pid_Ki=13.788
+pid_Kd=48.472
 
 #[extruder1]
 #step_pin: P0.1
@@ -210,7 +211,8 @@ kinematics: corexy
 max_velocity: 400
 #max_accel: 1500
 max_accel: 2000
-max_accel_to_decel: 2000
+#max_accel_to_decel: 2000
+minimum_cruise_ratio: 0.5
 max_z_velocity: 5
 max_z_accel: 100
 
@@ -254,7 +256,7 @@ value: 0
 pin: P1.27
 x_offset: 35
 y_offset: 0
-z_offset: 3.85
+z_offset: 3.65
 
 [bed_mesh]
 speed: 100
@@ -266,13 +268,13 @@ fade_start: 1.0
 fade_end: 10.0
 
 [screws_tilt_adjust]
-screw1: 0,5
+screw1: 10,5
 screw1_name: front left
 screw2: 310,5
 screw2_name: front right
-screw3: 0,370
+screw3: 10,360
 screw3_name: rear left
-screw4: 310,370
+screw4: 310,360
 screw4_name: rear right
 speed: 50
 horizontal_move_z: 10
@@ -340,29 +342,3 @@ gcode:
 ###########################################################################
 ###########################################################################
 
-#*# <---------------------- SAVE_CONFIG ---------------------->
-#*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
-#*#
-#*# [extruder]
-#*# control = pid
-#*# pid_kp = 27.300
-#*# pid_ki = 1.596
-#*# pid_kd = 116.706
-#*#
-#*# [bed_mesh default]
-#*# version = 1
-#*# points =
-#*# 	  0.149062, 0.065312, 0.050937, 0.155625
-#*# 	  0.043125, 0.031875, 0.018125, 0.090000
-#*# 	  0.087812, 0.066875, 0.069687, 0.143125
-#*# 	  0.178750, 0.095625, 0.085625, 0.191562
-#*# tension = 0.2
-#*# min_x = 40.0
-#*# algo = lagrange
-#*# y_count = 4
-#*# mesh_y_pps = 2
-#*# min_y = 15.0
-#*# x_count = 4
-#*# max_y = 369.99
-#*# mesh_x_pps = 2
-#*# max_x = 349.99

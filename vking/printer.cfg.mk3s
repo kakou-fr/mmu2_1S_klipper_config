@@ -254,7 +254,7 @@ value: 0
 pin: P1.27
 x_offset: 35
 y_offset: 0
-z_offset: 3.48
+z_offset: 3.85
 
 [bed_mesh]
 speed: 100
@@ -345,24 +345,6 @@ gcode:
 #*#
 #*# [extruder]
 #*# control = pid
-#*# pid_kp = 33.256
-#*# pid_ki = 4.106
-#*# pid_kd = 67.343
-#*#
-#*# [bed_mesh default]
-#*# version = 1
-#*# points =
-#*# 	  0.149062, 0.065312, 0.050937, 0.155625
-#*# 	  0.043125, 0.031875, 0.018125, 0.090000
-#*# 	  0.087812, 0.066875, 0.069687, 0.143125
-#*# 	  0.178750, 0.095625, 0.085625, 0.191562
-#*# tension = 0.2
-#*# min_x = 40.0
-#*# algo = lagrange
-#*# y_count = 4
-#*# mesh_y_pps = 2
-#*# min_y = 15.0
-#*# x_count = 4
-#*# max_y = 369.99
-#*# mesh_x_pps = 2
-#*# max_x = 349.99
+#*# pid_kp = 27.300
+#*# pid_ki = 1.596
+#*# pid_kd = 116.706
