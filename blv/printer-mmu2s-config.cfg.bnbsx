@@ -60,7 +60,7 @@ variable_filametrix_nb_cut: 1
 variable_filametrix_x_current: 1.5
 variable_filametrix_unload_length1: 35
 variable_filametrix_unload_length2: 55
-variable_enable_sensor_any : False
+variable_enable_sensor_any: False
 variable_enable_sensor_on_gear: False
 variable_enable_sensor_before_gear: True
 variable_enable_sensor_after_gear: True
